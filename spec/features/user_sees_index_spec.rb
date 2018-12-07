@@ -14,4 +14,12 @@ describe 'user_index' do
     expect(page).to have_content(buzz.age)
     expect(page).to have_content(buzz.job)
   end
+
+  it 'user_sees_avg_age' do
+    Astronaut.create(name: "N.A.", age: 55, job: "Commander")
+    Astronaut.create(name: "B.A.", age: 65, job: "Flight")
+    visit astronauts_path
+
+    expect(page).to have_content(Astronaut.average_age)
+  end
 end
