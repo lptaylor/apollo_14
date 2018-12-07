@@ -32,4 +32,18 @@ describe 'user_index' do
 
     expect(page).to have_content("#{m_1.title} #{m_3.title} #{m_2.title}")
   end
+
+  it 'user_sees_total_time_in_space' do
+    neil = Astronaut.create(name: "N.A.", age: 55, job: "Commander")
+    buzz = Astronaut.create(name: "B.A.", age: 65, job: "Flight")
+    neil.missions.create(title: "Apollo 13", time_in_space: 44)
+    neil.missions.create(title: "Zebra 13", time_in_space: 410)
+    neil.missions.create(title: "Gemini 5", time_in_space: 67)
+    buzz.missions.create(title: "Apollo 13", time_in_space: 44)
+    buzz.missions.create(title: "Zebra 13", time_in_space: 410)
+
+    visit astronauts_path
+
+    expect(page).to have_content("#{neil.name} #{neil.total_time_in_space} #{buzz.name} #{buzz.total_time_in_space}")
+  end
 end

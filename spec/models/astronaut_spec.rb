@@ -19,6 +19,15 @@ describe Astronaut, type: :model do
 
 
     expect(Astronaut.average_age).to eq(60)
-  end
+    end
+
+    it 'total_time_in_space' do
+      neil = Astronaut.create(name: "N.A.", age: 55, job: "Commander")
+      neil.missions.create(title: "Apollo 13", time_in_space: 50)
+      neil.missions.create(title: "Zebra 13", time_in_space: 400)
+      neil.missions.create(title: "Gemini 5", time_in_space: 50)
+
+      expect(Astronaut.total_time_in_space).to eq(500)
+    end
   end
 end
