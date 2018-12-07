@@ -6,4 +6,8 @@
   <%= astronaut.name %>
   <%= astronaut.age %>
   <%= astronaut.job %>
-  <%end%>
+<%end%>
+
+<% @missions_in_order.each do |mission| %>
+  <%= mission.title%>
+<%end%>

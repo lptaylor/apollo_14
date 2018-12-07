@@ -22,4 +22,14 @@ describe 'user_index' do
 
     expect(page).to have_content(Astronaut.average_age)
   end
+
+  it 'user_sees_space_missions_in_alpha_order' do
+    m_1 = Mission.create(title: "Apollo 13", time_in_space: 44)
+    m_2 = Mission.create(title: "Zebra 13", time_in_space: 410)
+    m_3 = Mission.create(title: "Gemini 5", time_in_space: 67)
+
+    visit astronauts_path
+
+    expect(page).to have_content("#{m_1.title} #{m_3.title} #{m_2.title}")
+  end
 end
